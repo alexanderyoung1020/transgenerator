@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transgenerator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #55CDFC 0%, #F7A8B8 50%, #FFFFFF 100%);
+    }
+    
+    .container {
+      text-align: center;
+    }
+    .resources {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Transgenerator</h1>
+    
+  
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput"><br><br>
+  
+  <label for="genderInput">Gender:</label>
+  <select id="genderInput">
+    <option value="masculine">Masculine</option>
+    <option value="feminine">Feminine</option>
+    <option value="androgynous">Androgynous</option>
+  </select><br><br>
+  
+  <label for="pronounInput">Pronouns:</label>
+  <select id="pronounInput">
+    <option value="he/him/his">he/him/his</option>
+    <option value="she/her/hers">she/her/hers</option>
+    <option value="they/them/theirs">they/them/theirs</option>
+    <option value="ze/zir/zirs">ze/zir/zirs</option>
+    <option value="xe/xem/xyrs">xe/xem/xyrs</option>
+    <option value="ey/em/eirs">ey/em/eirs</option>
+    <option value="ver/vir/vis">ver/vir/vis</option>
+    <option value="fae/faer/faers">fae/faer/faers</option>
+  </select><br><br>
+  
+  <button id="updateButton">Update</button>
+  <button id="clearButton">Clear</button>
+  <button id="randomNameButton">Get Random Name</button>
+  <div class="resources">
+
+
+    <a href="https://www.translifeline.org/">Trans Lifeline</a><br>
+    <a href="https://transequality.org/">National Center for Transgender Equality</a><br>
+    <a href="https://www.genderdiversity.org/">Gender Diversity</a><br>
+    <a href="https://transgenderlegal.org/">Transgender Legal Defense & Education Fund</a><br>
+    <!-- Add more links as needed -->
+  </div>
+  <br><br>
+  <div id="output"></div>
+
+  <script>
+   const randomNames = {
+  masculine: [
+    "Alex", "Sam", "Charlie", "Max", "Ryan", "Liam", "Ethan", "Noah", "Benjamin", "Caleb",
+    "Isaac", "Nathan", "Gabriel", "Elijah", "Owen", "Henry", "Jack", "Oliver", "William",
+    "James", "Daniel", "Samuel", "Leo", "David", "Joseph"
+  ],
+  feminine: [
+    "Emma", "Sophia", "Olivia", "Ava", "Isabella", "Mia", "Harper", "Emily", "Abigail",
+    "Grace", "Lily", "Chloe", "Victoria", "Stella", "Amelia", "Charlotte", "Ella", "Scarlett",
+    "Penelope", "Aurora", "Hazel"
+  ],
+  androgynous: [
+  "Taylor", "Jordan", "Casey", "Jamie", "Skyler", "Cameron", "Morgan", "Avery", "Charlie",
+    "Quinn", "Reese", "Sidney", "Finley", "Sage", "Hayden", "Riley", "Alex", "Parker", "Taylor",
+    "Blake", "Devon", "Ryan", "Jesse", "Logan", "Bailey", "Avery", "Drew", "Casey", "Jamie",
+    "Morgan", "Phoenix", "Robin", "Elliot", "Taylor", "Skylar", "Reese", "Sage", "Peyton", "Frankie",
+    "Jaden", "Emery", "Jordan", "Rowan", "Dakota", "Harley", "Phoenix", "River", "Taylor", "Sawyer",
+    "Payton", "Briar", "Charlie", "Dylan", "Hunter", "Reagan", "Mackenzie", "Alexis", "Jayden", "Hayden",
+    "Casey", "Peyton", "Shay", "Tatum", "Kai", "Rory", "Micah", "Ashton", "Dallas", "Arden"
+  ]
+
+};
+
+
+    function updateOutput() {
+      const name = document.getElementById("nameInput").value;
+      const pronouns = document.getElementById("pronounInput").value;
+      const pronounParts = pronouns.split("/");
+      const subjectPronoun = pronounParts[0];
+      const objectPronoun = pronounParts[1];
+      const possessivePronoun = pronounParts[2];
+
+      let outputText = "";
+      if (name) {
+        outputText = `${name} is a wonderful person and ${subjectPronoun} should be proud of ${objectPronoun}self, so the world is ${possessivePronoun}!`;
+      }
+
+      document.getElementById("output").textContent = outputText;
+    }
+
+    function clearInput() {
+      document.getElementById("nameInput").value = "";
+      document.getElementById("pronounInput").selectedIndex = 0;
+      document.getElementById("output").textContent = "";
+    }
+
+    function getRandomName() {
+      const gender = document.getElementById("genderInput").value;
+      const names = randomNames[gender];
+      const randomIndex = Math.floor(Math.random() * names.length);
+      const name = names[randomIndex];
+      document.getElementById("nameInput").value = name;
+    }
+
+    document.getElementById("updateButton").addEventListener("click", updateOutput);
+    document.getElementById("clearButton").addEventListener("click", clearInput);
+    document.getElementById("randomNameButton").addEventListener("click", getRandomName);
+  </script>
+</body>
+</html>
